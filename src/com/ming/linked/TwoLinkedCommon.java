@@ -1,4 +1,4 @@
-package linked;
+package com.ming.linked;
 
 /**
  * @Description TwoLinkedCommon 打印两个有序链表的公共部分

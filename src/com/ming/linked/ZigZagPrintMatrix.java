@@ -1,4 +1,4 @@
-package linked;
+package com.ming.linked;
 
 /**
  * @Description ZigZagPrintMatrix 之字形打印矩阵

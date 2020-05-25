@@ -1,4 +1,4 @@
-package linked;
+package com.ming.linked;
 
 /**
  * @Description PrintMatrixSpiralOrder 转圈打印矩阵

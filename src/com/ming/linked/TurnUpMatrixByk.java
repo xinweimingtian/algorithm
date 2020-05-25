@@ -1,4 +1,4 @@
-package linked;
+package com.ming.linked;
 
 /**
  * @Description TurnUpMatrixByk 在行列都排好序的矩阵中找数

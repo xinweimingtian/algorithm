@@ -1,4 +1,4 @@
-package linked;
+package com.ming.linked;
 
 import java.util.Stack;
 
