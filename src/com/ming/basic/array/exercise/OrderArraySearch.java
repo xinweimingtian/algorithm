@@ -159,4 +159,63 @@ public class OrderArraySearch {
         System.out.println("");
     }
 
+
+     /**
+      * 练习题 2.5 向orderedArray.java程序（清单2.4）的OrdArray类加入一个merge()方法，使之可以将两个
+      *  		有序的源数组合并成一个有序的目的数组。在main()中添加代码，向两个源数组中插入随机数，
+      *  		调用merge()方法，并将结果目的数组显示出来。两个源数组的数据项个数可能不同。在算法中
+      *  		需要先比较源数组中的关键字，从中选出最小的一个数据项复制到目的数组。同时还要考虑如何
+      *  		解决当一个源数组的数据项已经取完而另一个还剩一些数据项情况。
+      *
+      *   merge 和 merge1 是两种实现方式
+      * */
+
+
+    public static OrderArraySearch merge(OrderArraySearch arrayOne, OrderArraySearch arrayTwo) {
+        long start = System.currentTimeMillis();
+        System.out.println("merge 开始");
+        if (arrayOne == null || arrayTwo == null) {
+            return new OrderArraySearch(0);
+        }
+        int oneIndex = 0;
+        int twoIndex = 0;
+        OrderArraySearch result = new OrderArraySearch(arrayOne.size + arrayTwo.size + 1);
+        while (oneIndex  != -1 || twoIndex != -1) {
+            if (oneIndex != -1 && twoIndex != -1) {
+                if (arrayOne.data[oneIndex] >= arrayTwo.data[twoIndex]) {
+                    result.insert(arrayOne.data[oneIndex]);
+                    oneIndex++;
+                }else{
+                    result.insert(arrayTwo.data[twoIndex]);
+                    twoIndex++;
+                }
+            } else if (twoIndex != -1) {
+                result.insert(arrayTwo.data[twoIndex]);
+                twoIndex++;
+            } else {
+                result.insert(arrayOne.data[oneIndex]);
+                oneIndex++;
+            }
+
+            oneIndex = oneIndex == arrayOne.size() ? -1 : oneIndex;
+            twoIndex = twoIndex == arrayTwo.size() ? -1 : twoIndex;
+        }
+        System.out.println("merge 结束 ： " + (System.currentTimeMillis() - start));
+        return result;
+    }
+
+
+    public static OrderArraySearch merge1(OrderArraySearch oldArray1, OrderArraySearch oldArray2){
+        long start = System.currentTimeMillis();
+        System.out.println("merge1 开始");
+        OrderArraySearch newArray=new OrderArraySearch(oldArray1.size() + oldArray2.size());
+        for(int i=0;i<oldArray1.size();i++){
+            newArray.insert(oldArray1.data[i]);
+        }
+        for(int j=0;j<oldArray2.size();j++){
+            newArray.insert(oldArray2.data[j]);
+        }
+        System.out.println("merge1 结束 ： " + (System.currentTimeMillis() - start));
+        return newArray;
+    }
 }

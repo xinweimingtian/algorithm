@@ -51,6 +51,31 @@ public class HighArrayGetMax{
         return max;
     }
 
+    public void noDup() {
+        if (size == 0) {
+            return;
+        }
+        Integer num = -1;
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (data[i] != num && data[i] == data[j]) {
+                    data[j] = num;
+                }
+            }
+        }
+
+        for (int i = 0; i < size;) {
+            if (data[i] == num) {
+                for (int j = i; j < size; j++) {
+                    data[j] = data[j + 1];
+                }
+                size--;
+            } else {
+                i++;
+            }
+        }
+    }
+
     /**
      * 简单数据查询
      * @param searchKey 要查询的数据
