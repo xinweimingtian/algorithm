@@ -1,5 +1,10 @@
 package com.ming.exercise.leetcode.string.lengthsubstring;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * @Description LengthOfLongestSubstring
  * @Author Administrator
@@ -32,25 +37,72 @@ package com.ming.exercise.leetcode.string.lengthsubstring;
 public class LengthOfLongestSubstring {
 
     public static void main(String[] args) {
-        String ss = "abba";
+        String ss = "abccbaabcefgabc";
         System.out.println(lengthOfLongestSubstring(ss));
     }
 
+    /**
+     *  方法一
+     * @param str
+     * @return
+     */
     public static int lengthOfLongestSubstring(String str) {
         int size = 0;
-        int[] dict = new int[128]; //记录ASCII 码字符出现的位置，以字符作为下坐标
-        int left = 0; // 第一个指针字符开始 如果重复 移动指针到重复位置
-        int right = 0; // 每次都移动比较的指针  直到字符串最大长度
-        int i = 0; // ASCII码数组中字符位置  dict[i]存储 str中i字符的位置 从1开始
+        if (str == null || str.length() < 1) {
+            return size;
+        }
+        // 定义双指针 进行滑动窗口维护
+        int left = 0; // 左边维持的窗口指针
+        int right = 0; // 向右移动的指针
+        // 定义数组，按照ASCII码为下坐标存储在str中出现的位置+1
+        int[] arr = new int[128];
+        // 获取字符串的char ASCII码
+        int in;
 
+        // 循环判断 左指针小于字符串长度
         while (right < str.length()) {
-            i = str.charAt(right); // 获取右指针指向的字符串ASCII码
-            if (dict[i] > left) { // 如果dict[i] 存储的str位置大于左指针  那就证明 字符右侧有相同的
-                left = dict[i];  // 获取上一次相同字符 出现的位置 right-left+1  就是最长子串的长度
+            // 获取左指针当前位置的char
+            in = str.charAt(right);
+
+            // 判断char是否出现过 如果in 位置存储的值 大于 left
+            // 那就证明 已经重复出现 然后移动left到in的值的位置
+            if (arr[in] > left) {
+                left = arr[in];
             }
-            dict[i] = right + 1; //  从1开始  存储出现字符的位置
-            size = (size > right - left + 1) ? size : right - left + 1; // 获取最大子串长度
-            right++; // 右指针移动
+
+            // 存储in的值
+            arr[in] = right + 1;
+            // 进行判断 右指针-左指针+1 就是最长子串长度
+            size = size > right - left + 1 ? size : right - left + 1;
+            // 右指针移动
+            right++;
+        }
+        return size;
+    }
+
+    /**
+     * 方法二
+     * @param str
+     * @return
+     */
+    public static int lengthOfLongestSubstring1(String str) {
+        int size = 0; //总子串长度
+        if (str == null || str.length() < 1) {
+            return size;
+        }
+
+        HashMap<Character, Integer> hashMap = new HashMap<>();
+        // 初始化左指针和右指针，并遍历字符串
+        for(int left = 0, right = 0; right < str.length(); right++){
+            // 判断右指针指向的字符是否出现过
+            if(hashMap.containsKey(str.charAt(right))){
+                // 确定左指针的位置
+                left = Math.max(left, hashMap.get(str.charAt(right))+1);
+            }
+            // 对于第一次出现的字符，保存该字符的位置；对于多次出现的字符，更新该字符出现的位置
+            hashMap.put(str.charAt(right), right);
+            // 更新窗口的大小，保存最大的窗口大小
+            size = Math.max(size, right-left+1);
         }
         return size;
     }
