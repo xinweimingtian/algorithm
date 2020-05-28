@@ -16,6 +16,12 @@ public class SwapUtil {
         arr[j] = temp;
     }
 
+    public static void swap(long[] arr, int i, int j) {
+        long temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
     /**
      * 输出
      * @param arr
