@@ -26,19 +26,37 @@ import java.util.Map;
  */
 public class SubarraySum {
 
-    public int subarraySum(int[] nums, int k) {
+    public static void main(String[] args) {
+        int[] arr = new int[]{10, 10, 1};
+        System.out.println(subarraySum(arr, 10));
+    }
+
+
+    public static int subarraySum(int[] nums, int k) {
+        if (nums == null || nums.length < 1) {
+            return 0;
+        }
+        // 定义返回总数
         int count = 0;
-        int prefixSum = 0;
-        Map<Integer, Integer> map = new HashMap<>();
-        map.put(0, 1);
+
+        // 定义前缀和 pre[i] = nusm[0] + ...+ nums[i];
+        // 因为前缀 pre[i] = pre[i-1] + nums[i]
+        // 所以可知  pre[i] - pre[j] = k
+        // 也就是说 nums[0->i] - nums[0->j-1] = nums[i->j]  i>j>0
+        // 可以得出 如果 当前前缀和 - k 等于 nums[0->j-1]
+        // 定义map来进行存储前缀和 Key存储前缀和 value存储次数
+        Map<Integer, Integer> preMap = new HashMap<>();
+        // 因为存在nums[0->i] == k的情况 需要提前在map中添加
+        preMap.put(0, 1);
+        // 累计计算
+        int pre = 0;
 
         for (int i = 0; i < nums.length; i++) {
-            prefixSum += nums[i];
-            if (map.containsKey(prefixSum - k)) {
-                count += map.get(prefixSum - k);
+            pre += nums[i];
+            if (preMap.containsKey(pre - k)) {
+                count += preMap.get(pre - k);
             }
-            // 有默认的值返回默认的值 没有返回 0
-            map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+            preMap.put(pre, preMap.getOrDefault(pre, 0) + 1);
         }
         return count;
     }
