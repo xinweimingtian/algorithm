@@ -1,5 +1,7 @@
 package com.ming.sort;
 
+import java.util.Arrays;
+
 import com.ming.util.SwapUtil;
 
 /**
@@ -14,10 +16,10 @@ public class MergeSort {
     public static void main(String[] args) {
         int[] arr = {10, 11, 4, 5, 6, 14, 35, 23, 25, 44, 1, 0};
         System.out.println("排序前：");
-        SwapUtil.print(arr);
+        System.out.println(Arrays.toString(arr));
         mergeSort(arr);
         System.out.println("排序后：");
-        SwapUtil.print(arr);
+        System.out.println(Arrays.toString(arr));
     }
 
     public static void mergeSort(int[] arr){
