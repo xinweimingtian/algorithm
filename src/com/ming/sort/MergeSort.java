@@ -2,8 +2,6 @@ package com.ming.sort;
 
 import java.util.Arrays;
 
-import com.ming.util.SwapUtil;
-
 /**
  * @Description MergeSort
  * @Author Administrator
