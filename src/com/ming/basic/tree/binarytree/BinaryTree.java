@@ -9,6 +9,9 @@ public class BinaryTree {
 
     private BinaryTreeNode root;
 
+    public BinaryTree() {
+    }
+
     public BinaryTree(BinaryTreeNode root) {
         this.root = root;
     }
@@ -222,22 +225,22 @@ public class BinaryTree {
      */
     private void preOrder(BinaryTreeNode root) {
         if (root != null) {
-            System.out.print("\n " + root.getKeyData() + "\n" + root.getValueData());
+            System.out.print(root.getKeyData() + " ");
             preOrder(root.getLeftChild());
             preOrder(root.getRightChild());
         }
     }
 
     /**
-     * 中序遍历  先输出最子节点中间是根节点最后是右子节点
+     * 中序遍历  先输出最左子节点中间是根节点最后是右子节点
      * 根节点的左边是根节点的左子节点全部  根节点的右边是右子节点全部
      * @param root
      */
     private void inOrder(BinaryTreeNode root) {
         if (root != null) {
-            preOrder(root.getLeftChild());
-            System.out.print("\n " + root.getKeyData() + "\n" + root.getValueData());
-            preOrder(root.getRightChild());
+            inOrder(root.getLeftChild());
+            System.out.print(root.getKeyData() + " ");
+            inOrder(root.getRightChild());
         }
     }
 
@@ -248,9 +251,9 @@ public class BinaryTree {
      */
     private void postOrder(BinaryTreeNode root) {
         if (root != null) {
-            preOrder(root.getLeftChild());
-            preOrder(root.getRightChild());
-            System.out.print("\n " + root.getKeyData() + "\n" + root.getValueData());
+            postOrder(root.getLeftChild());
+            postOrder(root.getRightChild());
+            System.out.print(root.getKeyData() + " ");
         }
     }
 }
