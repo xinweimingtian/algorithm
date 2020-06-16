@@ -138,19 +138,6 @@ public class GraphDFS {
 }
 
 /**
- * 图中节点数据
- */
-class Vertex {
-    public char label; // 数据存储
-    public boolean wasVisited; // 是否被查询
-
-    public Vertex(char label) {
-        this.label = label;
-        this.wasVisited = false;
-    }
-}
-
-/**
  * 搜索存放元素
  */
 class StackX {
