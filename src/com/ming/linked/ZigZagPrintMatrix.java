@@ -29,8 +29,11 @@ public class ZigZagPrintMatrix {
             row1 = col1 == endC ? row1 + 1: row1;
             col1 = col1 == endC ? col1 : col1+ 1;
             // col2开始不变， row2开始增加， row2走到最后开始不变， col2开始增加
-            row2 = row2 == endR ? row2 : row2 + 1 ;
+//            row2 = row2 == endR ? row2 : row2 + 1 ;
+//            col2 = row2 == endR ? col2 + 1 : col2;
+
             col2 = row2 == endR ? col2 + 1 : col2;
+            row2 = row2 == endR ? row2 : row2 + 1 ;
             fromUp = !fromUp;
         }
         System.out.println();
